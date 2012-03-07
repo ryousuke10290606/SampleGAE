@@ -14,7 +14,7 @@ public class SampleGAEServlet2 extends HttpServlet {
 			throws ServletException, IOException {
 		resp.setContentType("text/plain");
 
-		resp.getWriter().println("It's new Srvlet.");
+		resp.getWriter().println("It's new Srvlet.test");
 	}
 
 }
