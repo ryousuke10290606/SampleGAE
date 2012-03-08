@@ -13,6 +13,13 @@ public class Peson {
 	//データストアに保存するフィールドに、@Persistentアノテーションを付与
 	@Persistent private String email;
 
+	//コンストラクタ
+	public Peson(String name,String email) {
+		this.name = name;
+		this.email =email;
+	}
+
+	//以下、getterとsetter
 	public String getName() {
 		return name;
 	}
