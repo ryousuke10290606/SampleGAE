@@ -6,7 +6,7 @@ import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 
 @PersistenceCapable(identityType = IdentityType.APPLICATION)
-public class Peson {
+public class Person {
 	//主キーフィールドにするために、@PrimaryKeyアノテーションを付与
 	@PrimaryKey private String name;
 
@@ -14,7 +14,7 @@ public class Peson {
 	@Persistent private String email;
 
 	//コンストラクタ
-	public Peson(String name,String email) {
+	public Person(String name,String email) {
 		this.name = name;
 		this.email =email;
 	}

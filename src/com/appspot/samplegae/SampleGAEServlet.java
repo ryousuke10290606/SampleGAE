@@ -2,6 +2,7 @@ package com.appspot.samplegae;
 
 import java.io.IOException;
 
+import javax.jdo.PersistenceManager;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -19,13 +20,39 @@ public class SampleGAEServlet extends HttpServlet {
 
 	}
 
-
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		// TODO 自動生成されたメソッド・スタブ
 		String name = req.getParameter("name");
-		System.out.println(name);
+		String email = req.getParameter("email");
+
+		if(name == null || "".equals(name)){
+			resp.getWriter().println("Plese enter name");
+			return;
+		}
+
+		if(email == null || "".equals(email)){
+			//emailが空の場合は、入力nameの名前でデータストアに対し検索をかける
+			PersistenceManager pm = PMF.get().getPersistenceManager();
+			Person person = pm.getObjectById(Person.class, name);
+			pm.close();
+			resp.getWriter().println("e-mail address of" + name +"is below:");
+			resp.getWriter().println("name:"+person.getName());
+			resp.getWriter().println("e-mail:"+person.getEmail());
+			return;
+		}else{
+			//emailが空の場合は、nameとemailの情報をデータストアに保存する
+			PersistenceManager pm = PMF.get().getPersistenceManager();
+			Person person = new Person(name,email);
+			pm.makePersistent(person);
+			pm.close();
+			resp.getWriter().println("you entered:");
+			resp.getWriter().println("name:"+name);
+			resp.getWriter().println("e-mail:"+email);
+			return;
+		}
+
 	}
 
 }
