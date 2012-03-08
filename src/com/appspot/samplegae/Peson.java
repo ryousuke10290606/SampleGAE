@@ -19,7 +19,7 @@ public class Peson {
 		this.email =email;
 	}
 
-	//以下、getterとsetter
+	//以下、getterとsetterを記載
 	public String getName() {
 		return name;
 	}
